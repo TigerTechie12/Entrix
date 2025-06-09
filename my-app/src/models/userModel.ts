@@ -1,4 +1,17 @@
-import mongoose from 'mongoose'
+import mongoose, { Document } from 'mongoose'
+
+export interface IUser extends Document {
+    username: string;
+    email: string;
+    password: string;
+    isVerified: boolean;
+    isAdmin: boolean;
+    forgotPasswordToken?: string;
+    forgotPasswordTokenExpiry?: Date;
+    verifyToken?: string;
+    verifyTokenExpiry?: Date;
+}
+
 const userSchema=new mongoose.Schema({
 username:{
     type:String,
