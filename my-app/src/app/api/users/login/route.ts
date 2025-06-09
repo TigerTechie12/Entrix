@@ -26,8 +26,15 @@ if (!process.env.TOKEN_SECRET) {
     throw new Error('TOKEN_SECRET is not defined in environment variables');
 }
 
-const token = jwt.sign(tokenData, process.env.TOKEN_SECRET, {expiresIn:"1h"});
-
+const token =await jwt.sign(tokenData, process.env.TOKEN_SECRET, {expiresIn:"1d"});
+const response=NextResponse.json({
+    message:"login successful",
+    success:true,
+})
+response.cookies.set("token",token,{
+    httpOnly:true,
+})
+return response
 }
 catch(e:any){
 return NextResponse.json({error:e.message},
